@@ -2,6 +2,7 @@ package com.example.jwt.JwtTest.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 @Entity
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
-public class Product implements Serializable {
+public class Product extends RepresentationModel<Product> implements Serializable {
     private static final long serialVersionUID=1L;
 
     @Id
