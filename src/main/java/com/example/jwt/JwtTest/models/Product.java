@@ -34,5 +34,5 @@ public class Product extends RepresentationModel<Product> implements Serializabl
     private Double price;
 
     @ToString.Include
-    private Integer Quantity;
+    private Integer quantity;
 }
