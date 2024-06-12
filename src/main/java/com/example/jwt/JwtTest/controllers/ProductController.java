@@ -29,7 +29,7 @@ public class ProductController {
     }
     @PostMapping
     public ResponseEntity<Product> saveProduct(@RequestBody @Valid Product product){
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                 .body(service.save(product));
 
     }
