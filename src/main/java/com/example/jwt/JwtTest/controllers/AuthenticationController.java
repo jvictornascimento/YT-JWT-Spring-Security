@@ -1,7 +1,10 @@
 package com.example.jwt.JwtTest.controllers;
 
 import com.example.jwt.JwtTest.Dtos.AuthenticationDTO;
+import com.example.jwt.JwtTest.Dtos.LoginResponseDTO;
 import com.example.jwt.JwtTest.Dtos.RegisterDTO;
+import com.example.jwt.JwtTest.infra.security.TokenService;
+import com.example.jwt.JwtTest.models.User;
 import com.example.jwt.JwtTest.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +24,15 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserService service;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
         var userNamePassword = new UsernamePasswordAuthenticationToken(data.email(),data.password());
         var auth = this.authenticationManager.authenticate(userNamePassword);
-        return ResponseEntity.ok().build();
+        var token  = tokenService.generateToken((User)auth.getPrincipal());
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
