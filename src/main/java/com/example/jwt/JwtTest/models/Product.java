@@ -15,6 +15,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 public class Product extends RepresentationModel<Product> implements Serializable {
+    @Serial
     private static final long serialVersionUID=1L;
 
     @Id
